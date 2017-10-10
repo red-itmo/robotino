@@ -16,7 +16,6 @@ RobotinoNode::RobotinoNode()
 	nh_.param<double>("max_angular_vel", max_angular_vel_, 1.0 );
 	nh_.param<double>("min_angular_vel", min_angular_vel_, 0.1 );
 
-	distances_clearing_pub_ = nh_.advertise<sensor_msgs::PointCloud>("/distance_sensors_clearing", 1, true);
 	joint_states_pub_= nh_.advertise<sensor_msgs::JointState>("/robotino_joint_states", 1, false);
 
 	com_.setName( "RobotinoNode" );
@@ -27,7 +26,6 @@ RobotinoNode::RobotinoNode()
 
 RobotinoNode::~RobotinoNode()
 {
-	distances_clearing_pub_.shutdown();
 	joint_states_pub_.shutdown();
 }
 
@@ -38,13 +36,11 @@ void RobotinoNode::initModules()
 	// Set the ComIds
 	analog_input_array_.setComId( com_.id() );
 	bumper_.setComId( com_.id() );
-	compact_bha_.setComId( com_.id() );
 	digital_input_array_.setComId( com_.id() );
 	digital_output_array_.setComId( com_.id() );
 	distance_sensor_array_.setComId( com_.id() );
 	electrical_gripper_.setComId( com_.id() );
 	encoder_input_.setComId( com_.id() );
-	grappler_.setComId( com_.id() );
 	motor_array_.setComId( com_.id() );
     //north_star_.setComId( com_.id() );
 	omni_drive_.setComId( com_.id() );
@@ -55,17 +51,6 @@ void RobotinoNode::initModules()
 
 void RobotinoNode::initMsgs()
 {
-	distances_clearing_msg_.header.frame_id = "base_link";
-	distances_clearing_msg_.header.stamp = curr_time_;
-	distances_clearing_msg_.points.resize( 720 );
-
-	for( unsigned int i = 0; i < distances_clearing_msg_.points.size(); ++i )
-	{
-		distances_clearing_msg_.points[i].x = 5.0 * cos(  0.008727 ); // 0.008727 = 0.5 degrees in radians
-		distances_clearing_msg_.points[i].y = 5.0 * sin(  0.008727 );
-		distances_clearing_msg_.points[i].z = 0.05; // 5cm above ground
-	}
-
 	joint_state_msg_.name.resize(3);
 	joint_state_msg_.position.resize(3, 0.0);
 	joint_state_msg_.velocity.resize(3, 0.0);
@@ -75,17 +60,6 @@ void RobotinoNode::initMsgs()
 
 	motor_velocities_.resize(4);
 	motor_positions_.resize(4);
-}
-
-void RobotinoNode::publishDistanceMsg()
-{
-//	curr_time_ = ros::Time::now();
-//	if( ( curr_time_ - clearing_time_ ).toSec() > 1 )
-//	{
-//		clearing_time_ = curr_time_;
-//		distances_clearing_pub_.publish( distances_clearing_msg_ );
-//	}
-	distances_clearing_pub_.publish( distances_clearing_msg_ );
 }
 
 void RobotinoNode::publishJointStateMsg()
@@ -113,17 +87,14 @@ bool RobotinoNode::spin()
 		curr_time_ = ros::Time::now();
 
 		analog_input_array_.setTimeStamp(curr_time_);
-		compact_bha_.setTimeStamp(curr_time_);
 		digital_input_array_.setTimeStamp(curr_time_);
 		distance_sensor_array_.setTimeStamp(curr_time_);
 		electrical_gripper_.setTimeStamp(curr_time_);
 		encoder_input_.setTimeStamp(curr_time_);
-		grappler_.setTimeStamp(curr_time_);
 		motor_array_.setTimeStamp(curr_time_);
         //north_star_.setTimeStamp(curr_time_);
 		power_management_.setTimeStamp(curr_time_);
 
-		publishDistanceMsg();
 		publishJointStateMsg();
 		com_.processEvents();
 		ros::spinOnce();
@@ -131,4 +102,3 @@ bool RobotinoNode::spin()
 	}
 	return true;
 }
-

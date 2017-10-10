@@ -51,15 +51,10 @@ add_message_files(
         AnalogReadings.msg
         EncoderReadings.msg
         MotorReadings.msg
-        SetBHAPressures.msg
-        BHAReadings.msg
-        GrapplerReadings.msg
         NorthStarReadings.msg
-        SetGrapplerAxes.msg
         DigitalReadings.msg
         GripperState.msg
         PowerReadings.msg
-        SetGrapplerAxis.msg
 )
 ## Generate services in the 'srv' folder
 add_service_files(

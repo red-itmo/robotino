@@ -23,6 +23,7 @@ public:
 	~OdometryROS();
 
 	void setTimeStamp(ros::Time stamp);
+	void setFrameId(std::string tf_prefix);
 
 private:
 	ros::NodeHandle nh_;

@@ -15,8 +15,9 @@ RobotinoNode::RobotinoNode()
 	nh_.param<double>("min_linear_vel", min_linear_vel_, 0.05 );
 	nh_.param<double>("max_angular_vel", max_angular_vel_, 1.0 );
 	nh_.param<double>("min_angular_vel", min_angular_vel_, 0.1 );
+	nh_.param<std::string>("tf_prefix", tf_prefix, "no_prefix");
 
-	joint_states_pub_= nh_.advertise<sensor_msgs::JointState>("/robotino_joint_states", 1, false);
+	joint_states_pub_= nh_no_private.advertise<sensor_msgs::JointState>("robotino_joint_states", 1, false);
 
 	com_.setName( "RobotinoNode" );
 
@@ -39,6 +40,7 @@ void RobotinoNode::initModules()
 	digital_input_array_.setComId( com_.id() );
 	digital_output_array_.setComId( com_.id() );
 	distance_sensor_array_.setComId( com_.id() );
+	distance_sensor_array_.setMsgFrameId(tf_prefix);
 	electrical_gripper_.setComId( com_.id() );
 	encoder_input_.setComId( com_.id() );
 	motor_array_.setComId( com_.id() );

@@ -34,11 +34,13 @@ public:
 
 private:
 	ros::NodeHandle nh_;
+	ros::NodeHandle nh_no_private;
 
 	std::string hostname_;
 	double max_linear_vel_, min_linear_vel_, max_angular_vel_, min_angular_vel_;
 	std::vector<float> motor_velocities_;
 	std::vector<int> motor_positions_;
+	std::string tf_prefix;
 
 	ros::Time curr_time_;
 

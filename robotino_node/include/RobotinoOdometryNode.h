@@ -25,6 +25,7 @@ private:
 	ros::NodeHandle nh_;
 
 	std::string hostname_;
+	std::string tf_prefix;
 
 	ComROS com_;
 	OdometryROS odometry_;

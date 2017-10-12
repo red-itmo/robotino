@@ -22,6 +22,7 @@ public:
 
 	void setNumber( int number );
 	void setTimeStamp(ros::Time stamp);
+	void setMsgFrameId(std::string tf_prefix);
 
 private:
 	ros::NodeHandle nh_;

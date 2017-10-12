@@ -23,11 +23,15 @@ void DistanceSensorArrayROS::setTimeStamp(ros::Time stamp)
 	stamp_ = stamp;
 }
 
+void DistanceSensorArrayROS::setMsgFrameId(std::string tf_prefix)
+{
+	distances_msg_.header.frame_id = (tf_prefix == "no_prefix") ? "base_link" : (tf_prefix + "/base_link");
+}
+
 void DistanceSensorArrayROS::distancesChangedEvent(const float* distances, unsigned int size)
 {
 	// Build the PointCloud msg
 	distances_msg_.header.stamp = stamp_;
-	distances_msg_.header.frame_id = "base_link";
 	distances_msg_.points.resize(size);
 
 	for(unsigned int i = 0; i < size; ++i)

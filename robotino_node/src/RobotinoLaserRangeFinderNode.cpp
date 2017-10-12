@@ -13,6 +13,7 @@ RobotinoLaserRangeFinderNode::RobotinoLaserRangeFinderNode()
 {
 	nh_.param<std::string>("hostname", hostname_, "172.26.1.1" );
 	nh_.param<int>("laserRangeFinderNumber", laserRangeFinderNumber_, 0 );
+	nh_.param<std::string>("tf_prefix", tf_prefix, "no_prefix");
 
 	std::ostringstream os;
 	os << "LaserRangeFinder" << laserRangeFinderNumber_;
@@ -34,6 +35,9 @@ void RobotinoLaserRangeFinderNode::initModules()
 
 	// Set the LaserRangeFinder numbers
 	laser_range_finder_.setNumber( laserRangeFinderNumber_ );
+
+	// Set the frame_id for scans
+	laser_range_finder_.setMsgFrameId( tf_prefix );
 
 	com_.connectToServer( false );
 }

@@ -11,6 +11,7 @@ RobotinoOdometryNode::RobotinoOdometryNode()
 	: nh_("~")
 {
 	nh_.param<std::string>("hostname", hostname_, "192.168.5.5" );
+	nh_.param<std::string>("tf_prefix", tf_prefix, "no_prefix");
 
 	com_.setName( "Odometry" );
 
@@ -27,6 +28,9 @@ void RobotinoOdometryNode::initModules()
 
 	// Set the ComIds
 	odometry_.setComId( com_.id() );
+
+	// Set frame Id
+	odometry_.setFrameId( tf_prefix );
 
 	com_.connectToServer( false );
 }

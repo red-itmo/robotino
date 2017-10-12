@@ -1,6 +1,7 @@
 <launch>
 
     <arg name="hostname" default="127.0.1.1" />
+    <arg name="tf_prefix" default="no_prefix"/>
 
     <node name="robotino_node" pkg="robotino_node" type="robotino_node" output="screen">
         <param name="hostname" value="$(arg hostname)" />
@@ -8,6 +9,7 @@
         <param name="min_linear_vel" value="0.01" />
         <param name="max_angular_vel" value="1.0" />
         <param name="min_angular_vel" value="0.01" />
+        <param name="tf_prefix" value="$(arg tf_prefix)"/>
         <remap from="robotino_joint_states" to="joint_states" />
     </node>
 

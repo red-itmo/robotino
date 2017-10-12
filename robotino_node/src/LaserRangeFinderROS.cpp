@@ -35,12 +35,16 @@ void LaserRangeFinderROS::setTimeStamp(ros::Time stamp)
 	stamp_ = stamp;
 }
 
+void LaserRangeFinderROS::setMsgFrameId(std::string tf_prefix)
+{
+	laser_scan_msg_.header.frame_id = (tf_prefix == "no_prefix") ? "laser_link" : (tf_prefix + "/laser_link");
+}
+
 void LaserRangeFinderROS::scanEvent(const rec::robotino::api2::LaserRangeFinderReadings &scan)
 {
 	// Build the LaserScan message
 	laser_scan_msg_.header.seq = scan.seq;
 	laser_scan_msg_.header.stamp = stamp_;
-	laser_scan_msg_.header.frame_id = "laser_link";
 
 	laser_scan_msg_.angle_min = scan.angle_min;
 	laser_scan_msg_.angle_max = scan.angle_max;

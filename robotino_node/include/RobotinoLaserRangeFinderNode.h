@@ -26,6 +26,7 @@ private:
 
 	std::string hostname_;
 	int laserRangeFinderNumber_;
+	std::string tf_prefix;
 
 	ComROS com_;
 	LaserRangeFinderROS laser_range_finder_;

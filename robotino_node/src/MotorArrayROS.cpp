@@ -39,7 +39,7 @@ void MotorArrayROS::velocitiesChangedEvent( const float* velocities, unsigned in
 	}
 }
 
-void MotorArrayROS::positionsChangedEvent( const float* positions, unsigned int size )
+void MotorArrayROS::positionsChangedEvent( const int* positions, unsigned int size )
 {
 	// Build the MotorReadings msg
 	motor_msg_.positions.resize( size, 0.0 );

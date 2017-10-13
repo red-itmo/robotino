@@ -52,7 +52,7 @@ void CameraROS::imageReceivedEvent(
 {
 	// Build the Image msg
 	img_msg_.header.stamp = stamp_;
-	sensor_msgs::fillImage(img_msg_, "bgr8", height, width, step, data);
+	sensor_msgs::fillImage(img_msg_, "rgb8", height, width, step, data);
 
 	// Build the CameraInfo msg
 	cam_info_msg_.header.stamp = stamp_;

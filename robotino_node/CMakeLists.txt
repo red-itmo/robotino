@@ -113,17 +113,14 @@ add_executable(
   src/robotino_node.cpp
   src/AnalogInputArrayROS.cpp
   src/BumperROS.cpp
-  src/CameraROS.cpp
   src/ComROS.cpp
   src/DigitalInputArrayROS.cpp
   src/DigitalOutputArrayROS.cpp
   src/DistanceSensorArrayROS.cpp
   src/ElectricalGripperROS.cpp
   src/EncoderInputROS.cpp
-  src/LaserRangeFinderROS.cpp
   src/MotorArrayROS.cpp
   src/NorthStarROS.cpp
-  src/OdometryROS.cpp
   src/OmniDriveROS.cpp
   src/PowerManagementROS.cpp
   src/RobotinoNode.cpp

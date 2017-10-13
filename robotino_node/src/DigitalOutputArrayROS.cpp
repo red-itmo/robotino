@@ -20,12 +20,14 @@ DigitalOutputArrayROS::~DigitalOutputArrayROS()
 
 void DigitalOutputArrayROS::setDigitalValuesCallback( const robotino_msgs::DigitalReadingsConstPtr& msg)
 {
-	int numValues = msg->values.size();
-	if( numValues > 0 )
-	{
-		bool values[numValues];
+	if(msg->values.size() == numDigitalOutputs()){
 
-		memcpy( values, msg->values.data(), numValues * sizeof(bool) );
-		//setValues( values, numValues );
+		int values[numDigitalOutputs()];
+		unsigned int i;
+
+		for(i = 0; i < numDigitalOutputs(); i++)
+			values[i] = msg->values[i];
+
+		setValues(values, numDigitalOutputs());
 	}
 }

@@ -72,9 +72,9 @@ void RobotinoNode::publishJointStateMsg()
 	joint_state_msg_.velocity[1] = ( ( motor_velocities_[0] / 16 ) * (2 * 3.142) / 60 );
 	joint_state_msg_.velocity[2] = ( ( motor_velocities_[1] / 16 ) * (2 * 3.142) / 60 );
 
-	joint_state_msg_.position[0] = ( motor_positions_[2] / 16 ) * (2 * 3.142);
-	joint_state_msg_.position[1] = ( motor_positions_[0] / 16 ) * (2 * 3.142);
-	joint_state_msg_.position[2] = ( motor_positions_[1] / 16 ) * (2 * 3.142);
+	joint_state_msg_.position[0] = ( motor_positions_[2] / 16.0 / 2048.0 ) * (2 * 3.142);
+	joint_state_msg_.position[1] = ( motor_positions_[0] / 16.0 / 2048.0 ) * (2 * 3.142);
+	joint_state_msg_.position[2] = ( motor_positions_[1] / 16.0 / 2048.0 ) * (2 * 3.142);
 
 	joint_state_msg_.header.stamp = curr_time_;
 	joint_states_pub_.publish( joint_state_msg_ );

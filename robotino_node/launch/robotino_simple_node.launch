@@ -10,6 +10,8 @@
         <param name="min_linear_vel" value="0.05" />
         <param name="max_angular_vel" value="0.5" />
         <param name="min_angular_vel" value="0.01" />
+        <param name="ns_room_id" value="3" />
+        <param name="ns_ceil_height" value="3.0" />
         <param name="tf_prefix" value="$(arg tf_prefix)" />
         <remap from="robotino_joint_states" to="joint_states" />
         <!--remap from="image_raw" to="image"/-->

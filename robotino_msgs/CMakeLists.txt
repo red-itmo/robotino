@@ -62,6 +62,7 @@ add_service_files(
         ResetOdometry.srv
         SetEncoderPosition.srv
         SetGripperState.srv
+        SetNsCeilHeight.srv
 )
 
 ## Generate actions in the 'action' folder

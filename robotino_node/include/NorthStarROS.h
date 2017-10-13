@@ -12,6 +12,7 @@
 
 #include <ros/ros.h>
 #include "robotino_msgs/NorthStarReadings.h"
+#include "robotino_msgs/SetNsCeilHeight.h"
 
 class NorthStarROS : public rec::robotino::api2::NorthStar
 {
@@ -28,7 +29,11 @@ private:
 
 	robotino_msgs::NorthStarReadings north_star_msg_;
 
+	ros::ServiceServer set_ns_ceil_height_server_;
+
 	ros::Time stamp_;
+
+	bool setNsCeilHeightCallback(robotino_msgs::SetNsCeilHeight::Request &req, robotino_msgs::SetNsCeilHeight::Response &res);
 
 	void readingsEvent( const rec::robotino::api2::NorthStarReadings& readings );
 };

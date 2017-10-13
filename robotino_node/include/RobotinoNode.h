@@ -40,6 +40,8 @@ private:
 	double max_linear_vel_, min_linear_vel_, max_angular_vel_, min_angular_vel_;
 	std::vector<float> motor_velocities_;
 	std::vector<int> motor_positions_;
+	int ns_room_id;
+	double ns_ceil_height;
 	std::string tf_prefix;
 
 	ros::Time curr_time_;
@@ -57,7 +59,7 @@ private:
 	ElectricalGripperROS electrical_gripper_;
 	EncoderInputROS encoder_input_;
 	MotorArrayROS motor_array_;
-	//NorthStarROS north_star_;
+	NorthStarROS north_star_;
 	OmniDriveROS omni_drive_;
 	PowerManagementROS power_management_;
 

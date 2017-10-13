@@ -15,6 +15,8 @@ RobotinoNode::RobotinoNode()
 	nh_.param<double>("min_linear_vel", min_linear_vel_, 0.05 );
 	nh_.param<double>("max_angular_vel", max_angular_vel_, 1.0 );
 	nh_.param<double>("min_angular_vel", min_angular_vel_, 0.1 );
+	nh_.param<int>("ns_room_id", ns_room_id, 3);
+	nh_.param<double>("ns_ceil_height", ns_ceil_height, 3.0);
 	nh_.param<std::string>("tf_prefix", tf_prefix, "no_prefix");
 
 	joint_states_pub_= nh_no_private.advertise<sensor_msgs::JointState>("robotino_joint_states", 1, false);
@@ -34,6 +36,7 @@ void RobotinoNode::initModules()
 {
 	com_.setAddress( hostname_.c_str() );
 
+	com_.connectToServer( true );
 	// Set the ComIds
 	analog_input_array_.setComId( com_.id() );
 	bumper_.setComId( com_.id() );
@@ -44,11 +47,12 @@ void RobotinoNode::initModules()
 	electrical_gripper_.setComId( com_.id() );
 	encoder_input_.setComId( com_.id() );
 	motor_array_.setComId( com_.id() );
-    //north_star_.setComId( com_.id() );
+	north_star_.setComId( com_.id() );
+	north_star_.setRoomId(ns_room_id);
+	north_star_.setCeilingCal(ns_ceil_height);
 	omni_drive_.setComId( com_.id() );
 	power_management_.setComId( com_.id() );
 	omni_drive_.setMaxMin(max_linear_vel_, min_linear_vel_, max_angular_vel_, min_angular_vel_ );
-	com_.connectToServer( false );
 }
 
 void RobotinoNode::initMsgs()
@@ -94,7 +98,7 @@ bool RobotinoNode::spin()
 		electrical_gripper_.setTimeStamp(curr_time_);
 		encoder_input_.setTimeStamp(curr_time_);
 		motor_array_.setTimeStamp(curr_time_);
-        //north_star_.setTimeStamp(curr_time_);
+		north_star_.setTimeStamp(curr_time_);
 		power_management_.setTimeStamp(curr_time_);
 
 		publishJointStateMsg();

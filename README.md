@@ -17,12 +17,21 @@ These packages are modified version of their namesakes from revision [3303](http
 
 
 ## Installation
-Just copy this repository into *src* subfolder of your workspace by for example this way
+1. Add a needed repository as it described [here](http://wiki.openrobotino.org/index.php?title=Debrepository).
+2. Update information about available repositories
+```bash
+$ sudo apt-get update
+```
+3. Install RobotinoAPI2 library by typing the command
+```bash
+$ sudo apt-get install robotino-api2
+```
+4. Copy this repository into *src* subfolder of your workspace by for example this way
 ```bash
 $ cd PATH_TO_YOUR_WORKSPACE/src
 $ git clone https://github.com/red-itmo/robotino.git
 ```
-and run catkin_make command:
+5. Run catkin_make command:
 ```bash
 $ cd PATH_TO_YOUR_WORKSPACE
 $ catkin_make

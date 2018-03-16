@@ -17,25 +17,27 @@ These packages are modified version of their namesakes from revision [3303](http
 
 
 ## Installation
-1. Add a needed repository as it described [here](http://wiki.openrobotino.org/index.php?title=Debrepository).
+1. Add a needed repository as it is described [here](http://wiki.openrobotino.org/index.php?title=Debrepository).
 2. Update information about available repositories
-```bash
-$ sudo apt-get update
-```
+    ```bash
+    $ sudo apt-get update
+    ```
 3. Install RobotinoAPI2 library by typing the command
-```bash
-$ sudo apt-get install robotino-api2
-```
+    ```bash
+    $ sudo apt-get install robotino-api2
+    ```
+    **Note:** Alternatively RobotinoAPI2 library can be built from sources as it is described [here](http://wiki.openrobotino.org/index.php?title=API2_source_build).
+
 4. Copy this repository into *src* subfolder of your workspace by for example this way
-```bash
-$ cd PATH_TO_YOUR_WORKSPACE/src
-$ git clone https://github.com/red-itmo/robotino.git
-```
+    ```bash
+    $ cd PATH_TO_YOUR_WORKSPACE/src
+    $ git clone https://github.com/red-itmo/robotino.git
+    ```
 5. Run catkin_make command:
-```bash
-$ cd PATH_TO_YOUR_WORKSPACE
-$ catkin_make
-```
+    ```bash
+    $ cd PATH_TO_YOUR_WORKSPACE
+    $ catkin_make
+    ```
 
 
 ## Decription of nodes from robotino_node package
